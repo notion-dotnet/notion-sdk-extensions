@@ -6,10 +6,11 @@ namespace Notion.Client.Extensions
 {
     public static class TitleRelatedExtensions
     {
-        public static KeyValuePair<string, PropertyValue> GetTitleProperty(this Page page)
+        public static (string Key, TitlePropertyValue Value) GetTitleProperty(this Page page)
         {
-            return page.Properties.First(x =>
+            var keyValuePair = page.Properties.First(x =>
                 x.Value.Type == PropertyValueType.Title);
+            return (Key: keyValuePair.Key, Value: (TitlePropertyValue) keyValuePair.Value);
         }
 
         /// <summary>
